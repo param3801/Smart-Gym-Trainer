@@ -21,6 +21,35 @@ def inject_local_font(font_path, font_name):
     fmt = {"otf": "opentype"}.get(ext, ext)
     mime = {"otf": "font/otf"}.get(ext, f"font/{ext}")
 
+    import streamlit as st
+
+    st.markdown(
+    """
+    <style>
+    /* Hide Deploy button */
+    .stDeployButton {
+        display: none;
+    }
+
+    /* Hide three-dot menu */
+    [data-testid="stToolbar"] {
+        display: none;
+    }
+
+    /* Hide header */
+    header {
+        display: none;
+    }
+
+    /* Hide footer */
+    footer {
+        display: none;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
     st.markdown(f"""
         <style>
         @font-face {{

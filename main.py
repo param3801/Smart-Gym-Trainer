@@ -170,6 +170,25 @@ def main():
                 st.metric("Front Knee Angle", f"{st.session_state.front_knee_angle}°")
                 st.metric("Torso Angle", f"{st.session_state.torso_angle}°")
                 st.metric("Balance Status", st.session_state.balance_status)
+        st.markdown(
+    """
+    <style>
+    .sidebar-footer {
+        position: fixed;
+        bottom: 15px;
+        left: 20px;
+        color: #888;
+        font-size: 12px;
+        text-align: center;
+    }
+    </style>
+
+    <div class="sidebar-footer">
+        Made by ❤️ Param 
+    </div>
+    """,
+    unsafe_allow_html=True
+) 
 
     st.title("AI Real-time GYM Coach")
     st.markdown("#### Real-time pose detection with proactive AI voice coaching")
