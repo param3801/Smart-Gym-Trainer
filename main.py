@@ -253,7 +253,7 @@ def main():
         "video": True,
         "audio": False
     },
-    async_processing=True
+    async_processing=False
 )
 
 
