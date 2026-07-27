@@ -244,8 +244,8 @@ def main():
             # TURN Server over TCP/TLS (Fallback for strict corporate firewalls)
             {
                 "urls": ["turn:openrelay.metered.ca:443?transport=tcp"],
-                "username": "f28945c4e33b8cc4a0403602",
-                "credential": "BvJm1mPrTZYEmPQn"
+                "username": username,
+                "credential": password
             }
         ]
     },
