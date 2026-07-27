@@ -222,17 +222,40 @@ def main():
             unsafe_allow_html=True,
         )
     else:
+        # Retrieve credentials securely
+        username = os.environ.get("OPENRELAY_USERNAME")
+        password = os.environ.get("OPENRELAY_PASSWORD")
         context = webrtc_streamer(
-            key="exercise-analysis",
-            mode=WebRtcMode.SENDRECV,
-            video_processor_factory=VideoProcessorClass,
-            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
-            media_stream_constraints={
-                "video": True,
-                "audio": False
+        key="exercise-analysis",
+        mode=WebRtcMode.SENDRECV,
+        video_processor_factory=VideoProcessorClass,
+        rtc_configuration={
+        "iceServers": [
+            # Standard STUN Server (Usually does not require a password)
+            {
+                "urls": ["stun:openrelay.metered.ca:80"]
             },
-            async_processing=True
-        )
+            # TURN Server over UDP (Requires your credentials)
+            {
+                "urls": ["turn:openrelay.metered.ca:80"],
+                "username": username,
+                "credential": password
+            },
+            # TURN Server over TCP/TLS (Fallback for strict corporate firewalls)
+            {
+                "urls": ["turn:openrelay.metered.ca:443?transport=tcp"],
+                "username": "f28945c4e33b8cc4a0403602",
+                "credential": "BvJm1mPrTZYEmPQn"
+            }
+        ]
+    },
+    media_stream_constraints={
+        "video": True,
+        "audio": False
+    },
+    async_processing=True
+)
+
 
         sync_metrics_update(context)
 
